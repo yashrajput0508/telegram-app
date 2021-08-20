@@ -64,18 +64,23 @@ def sample_responses(input_text):
                 f.close()
             return data[1]
         else:
-            return "Enter valid value"
+            return "Enter value between 1 to 5"
     elif f=='1':
         try:
             val = input_text.split(",")
-            income, paydate = str(val[0]), str(val[1])
-            db.update1(income, paydate)
-            with open("file.txt", 'w') as f:
-                f.write('2')
-                f.close()
-            return data[2]
+            val[0] = val[0].strip(" ")
+            val[1] = val[1].strip(" ")
+            if 1 <= int(val[1]) <= 31:
+                income, paydate = str(val[0]), str(val[1])
+                db.update1(income, paydate)
+                with open("file.txt", 'w') as f:
+                    f.write('2')
+                    f.close()
+                return data[2]
+            else:
+                return "Enter valid Date"
         except:
-            return "Enter valid format"
+            return "enter correct income value"
 
     elif f=='2':
         invest = input_text
@@ -90,7 +95,7 @@ def sample_responses(input_text):
             else:
                 return "Monthly Investments greater than income"
         except:
-            return "Enter valid value"
+            return "enter correct invest value"
 
     elif f=='3':
         expenses = input_text
@@ -125,3 +130,5 @@ type Y for contunue type N for input again.
             return data[0]
         else:
             return "type Y for contunue type N for input again."
+
+print(sample_responses(input("Val:-")))
