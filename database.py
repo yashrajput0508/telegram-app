@@ -30,6 +30,9 @@ def update3(expenses):
     }
     records.update_one({'id': '1'}, {'$set': new_record})
 
+def get_data():
+    return records.find_one({'id':'1'})
+
 def reset():
     new_record = {
         "income" : "None",
