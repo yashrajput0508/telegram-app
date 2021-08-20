@@ -52,7 +52,13 @@ def sample_responses(input_text):
     with open("file.txt",'r') as value:
         f = value.readlines()[0]
         value.close()
-    if f=='0':
+    if input_text=="restart":
+        with open("file.txt", 'w') as f:
+            f.write('0')
+            f.close()
+        db.reset()
+        return data[0]
+    elif f=='0':
         if input_text in ['1','2','3','4','5']:
             with open("file.txt", 'w') as f:
                 f.write('1')
@@ -107,9 +113,4 @@ type Y for contunue type N for input again.
             return data[0]
         else:
             return "type Y for contunue type N for input again."
-    elif input_text=="restart":
-        with open("file.txt", 'w') as f:
-            f.write('0')
-            f.close()
-        db.reset()
-        return data[0]
+    
